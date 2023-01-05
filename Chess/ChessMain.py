@@ -87,7 +87,6 @@ def main():
 
         if moveMade:
             validMoves = gameState.getValidMoves()
-            print(validMoves)
             moveMade = False
 
         drawGameState(screen, gameState, validMoves, selectedSquare)
@@ -101,6 +100,13 @@ def main():
         elif gameState.staleMate:
             gameOver = True
             drawText(screen, 'Stalemate')
+        elif gameState.eigthRankFinish:
+            gameOver = True
+            if gameState.whiteToMove:
+                drawText(screen, 'Black king wins the race!')
+                print(gameState.blackKingLocation)
+            else:
+                drawText(screen, 'White king wins the race!')
         
         clock.tick(MAX_FPS)
         pygame.display.flip()
