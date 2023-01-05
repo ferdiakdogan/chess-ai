@@ -61,11 +61,12 @@ class GameState():
             self.whiteToMove = not self.whiteToMove
             if move.pieceMoved == 'wK':
                 self.whiteKingLocation = (move.startRow, move.startColumn)
+                if move.endRow == 0:
+                    self.eigthRankFinish = False
             if move.pieceMoved == 'bK':
                 self.blackKingLocation = (move.startRow, move.startColumn)
-            self.checkMate = False
-            self.staleMate = False
-            self.eigthRankFinish = False
+                if move.endRow == 0:
+                    self.eigthRankFinish = False
 
     def getValidMoves(self):
         moves = self.getPossibleMoves()
