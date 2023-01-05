@@ -68,6 +68,9 @@ def main():
                                 moveMade = True
                                 selectedSquare = ()
                                 playerClicks = []
+                                if gameState.whiteKingLocation[0] == 0 or gameState.blackKingLocation[0] == 0:
+                                    gameState.eigthRankFinish = True
+
                         if not moveMade:
                             playerClicks = [selectedSquare]
 
