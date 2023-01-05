@@ -108,7 +108,6 @@ def main():
             gameOver = True
             if gameState.whiteToMove:
                 drawText(screen, 'Black king wins the race!')
-                print(gameState.blackKingLocation)
             else:
                 drawText(screen, 'White king wins the race!')
         
