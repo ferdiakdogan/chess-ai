@@ -33,6 +33,7 @@ class GameState():
         self.blackKingLocation = (6, 0)
         self.checkMate = False
         self.staleMate = False
+        self.eigthRankFinish = False
 
     def makeMove(self, move):
         self.board[move.startRow][move.startColumn] = "--"
@@ -40,7 +41,7 @@ class GameState():
         self.moveLog.append(move)
         self.whiteToMove = not self.whiteToMove
         if move.pieceMoved == 'wK':
-            self.whiteKingLocation = (move.endRow, move.endColumn)
+            self.whiteKingLocation = (move.endRow, move.endColumn)   
         if move.pieceMoved == 'bK':
             self.blackKingLocation = (move.endRow, move.endColumn)
 
