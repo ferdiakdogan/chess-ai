@@ -5,8 +5,8 @@ This script is the main script to control all the subscripts
 import pygame
 import ChessEngine
 
-WIDTH = 1080
-HEIGHT = 1080
+WIDTH = 400
+HEIGHT = 400
 
 DIMENSION = 8
 
