@@ -6,13 +6,13 @@ import time
 import pygame
 import ChessEngine, SmartMoveFinder
 
-WIDTH = 1080
-HEIGHT = 1080
+WIDTH = 480
+HEIGHT = 480
 
 DIMENSION = 8
 
 SQUARE_SIZE = WIDTH // DIMENSION
-MAX_FPS = 15
+MAX_FPS = 60
 
 IMAGES = {}
 
@@ -44,8 +44,8 @@ def main():
     selectedSquare = ()
     playerClicks = []
     gameOver = False
-    playerOne = False # Human playing white = true, ai is false
-    playerTwo = False # Human playing black = true, ai is false
+    playerOne = True # Human playing white = true, ai is false
+    playerTwo = True # Human playing black = true, ai is false
 
     while running:
         humanTurn = (gameState.whiteToMove and playerOne) or (not gameState.whiteToMove and playerTwo)

@@ -71,15 +71,18 @@ class GameState():
                     self.eigthRankFinish = False
 
     def getValidMoves(self):
+        alreadyRemoved = False
         moves = self.getPossibleMoves()
         for i in range(len(moves)-1, -1, -1):
             self.makeMove(moves[i])
             self.whiteToMove = not self.whiteToMove
             if self.inCheck():
                 moves.remove(moves[i])
+                alreadyRemoved = True
             self.whiteToMove = not self.whiteToMove
-            if self.inCheck():
+            if self.inCheck() and not alreadyRemoved:
                 moves.remove(moves[i])
+                alreadyRemoved = False
             self.undoMove()
         
         if len(moves) == 0:
@@ -87,6 +90,8 @@ class GameState():
                 self.checkMate = True
             else:
                 self.staleMate = True
+        elif self.blackKingLocation[0] == 0 and self.whiteKingLocation[0] == 0:
+            self.staleMate = True
         else:
             self.checkMate = False
             self.staleMate = False
