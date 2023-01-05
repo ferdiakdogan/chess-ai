@@ -1,5 +1,6 @@
 '''
 This class is for the current state of the board.
+Adding comment to check.
 '''
 
 class GameState():
