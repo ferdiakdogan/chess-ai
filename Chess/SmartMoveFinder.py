@@ -3,7 +3,7 @@ import random
 pieceScore = {"K": 0, "Q": 10, "R":5, "B": 3, "N": 3, "p": 1}
 WIN = 1000
 DRAW = 0
-DEPTH = 1
+DEPTH = 2
 
 def findRandomMove(validMoves):
     return validMoves[random.randint(0, len(validMoves) - 1)]

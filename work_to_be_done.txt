@@ -1,13 +1,11 @@
 1 - Racing Kings specs
-	1.1 - Checks not allowed
-	1.2 - 8th rank finishes the game
+	1.1 - Checks not allowed - Done
+	1.2 - 8th rank finishes the game - Done
 
 2 - A.I. Part
-	2.1 - Implementing Minmax algorithm
+	2.1 - Implementing Minmax algorithm - Done
 	2.2 - Implementing alpha/beta pruning
 
 -------------------------------------------------------------------------------------------
 
 3 - Experiments
-
-asdfasfasdf
