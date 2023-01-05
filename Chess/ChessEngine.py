@@ -42,9 +42,13 @@ class GameState():
         self.moveLog.append(move)
         self.whiteToMove = not self.whiteToMove
         if move.pieceMoved == 'wK':
-            self.whiteKingLocation = (move.endRow, move.endColumn)   
+            self.whiteKingLocation = (move.endRow, move.endColumn)
+            if move.endRow == 0:
+                self.eigthRankFinish = True
         if move.pieceMoved == 'bK':
             self.blackKingLocation = (move.endRow, move.endColumn)
+            if move.endRow == 0:
+                self.eigthRankFinish = True
 
         if move.isPawnPromotion:
             self.board[move.endRow][move.endColumn] = move.pieceMoved[0] + 'Q'
@@ -59,6 +63,9 @@ class GameState():
                 self.whiteKingLocation = (move.startRow, move.startColumn)
             if move.pieceMoved == 'bK':
                 self.blackKingLocation = (move.startRow, move.startColumn)
+            self.checkMate = False
+            self.staleMate = False
+            self.eigthRankFinish = False
 
     def getValidMoves(self):
         moves = self.getPossibleMoves()
@@ -69,6 +76,7 @@ class GameState():
             #     moves.remove(moves[i])
             self.whiteToMove = not self.whiteToMove
             self.undoMove()
+        
         # if len(moves) == 0:
         #     if self.inCheck():
         #         self.checkMate = True

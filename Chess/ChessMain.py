@@ -2,11 +2,12 @@
 This script is the main script to control all the subscripts
 '''
 
+import time
 import pygame
 import ChessEngine, SmartMoveFinder
 
-WIDTH = 400
-HEIGHT = 400
+WIDTH = 1080
+HEIGHT = 1080
 
 DIMENSION = 8
 
@@ -71,9 +72,6 @@ def main():
                                 moveMade = True
                                 selectedSquare = ()
                                 playerClicks = []
-                                if gameState.whiteKingLocation[0] == 0 or gameState.blackKingLocation[0] == 0:
-                                    gameState.eigthRankFinish = True
-
                         if not moveMade:
                             playerClicks = [selectedSquare]
 
@@ -94,11 +92,12 @@ def main():
 
         # AI move finder logic
         if not gameOver and not humanTurn:
-            aiMove = SmartMoveFinder.findRandomMove(validMoves)
+            aiMove = SmartMoveFinder.findBestMove(gameState, validMoves)
+            if aiMove is None:
+                aiMove = SmartMoveFinder.findRandomMove(validMoves)
             gameState.makeMove(aiMove)
             moveMade = True
-            if gameState.whiteKingLocation[0] == 0 or gameState.blackKingLocation[0] == 0:
-                gameState.eigthRankFinish = True
+            time.sleep(1)
 
 
         if moveMade:
