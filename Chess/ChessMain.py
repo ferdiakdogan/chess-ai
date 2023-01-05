@@ -79,6 +79,7 @@ def main():
                     gameState.undoMove()
                     moveMade = True
                     gameOver = False
+                    gameState.eigthRankFinish = False
                     
                 if e.key == pygame.K_r:
                     gameState = ChessEngine.GameState()
