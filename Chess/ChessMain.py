@@ -3,7 +3,7 @@ This script is the main script to control all the subscripts
 '''
 
 import pygame
-import ChessEngine
+import ChessEngine, SmartMoveFinder
 
 WIDTH = 400
 HEIGHT = 400
@@ -43,12 +43,15 @@ def main():
     selectedSquare = ()
     playerClicks = []
     gameOver = False
+    playerOne = True # Human playing white = true, ai is false
+    playerTwo = True # Human playing black = true, ai is false
 
     while running:
+        humanTurn = (gameState.whiteToMove and playerOne) or (not gameState.whiteToMove and playerTwo)
         for e in pygame.event.get():
             if e.type == pygame.QUIT:
                     running = False
-            if not gameOver:
+            if not gameOver and humanTurn:
                 if e.type == pygame.MOUSEBUTTONDOWN:
                     location = pygame.mouse.get_pos()
                     col = location[0]//SQUARE_SIZE
@@ -88,6 +91,15 @@ def main():
                     playerClicks = []
                     moveMade = False
                     gameOver = False
+
+        # AI move finder logic
+        if not gameOver and not humanTurn:
+            aiMove = SmartMoveFinder.findRandomMove(validMoves)
+            gameState.makeMove(aiMove)
+            moveMade = True
+            if gameState.whiteKingLocation[0] == 0 or gameState.blackKingLocation[0] == 0:
+                gameState.eigthRankFinish = True
+
 
         if moveMade:
             validMoves = gameState.getValidMoves()
