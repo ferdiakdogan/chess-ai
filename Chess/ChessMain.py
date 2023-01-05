@@ -44,8 +44,8 @@ def main():
     selectedSquare = ()
     playerClicks = []
     gameOver = False
-    playerOne = True # Human playing white = true, ai is false
-    playerTwo = True # Human playing black = true, ai is false
+    playerOne = False # Human playing white = true, ai is false
+    playerTwo = False # Human playing black = true, ai is false
 
     while running:
         humanTurn = (gameState.whiteToMove and playerOne) or (not gameState.whiteToMove and playerTwo)
@@ -92,12 +92,11 @@ def main():
 
         # AI move finder logic
         if not gameOver and not humanTurn:
-            aiMove = SmartMoveFinder.findBestMove(gameState, validMoves)
+            aiMove = SmartMoveFinder.findBestMoveMinMax(gameState, validMoves)
             if aiMove is None:
                 aiMove = SmartMoveFinder.findRandomMove(validMoves)
             gameState.makeMove(aiMove)
             moveMade = True
-            time.sleep(1)
 
 
         if moveMade:

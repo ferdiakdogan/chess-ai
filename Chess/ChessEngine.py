@@ -5,7 +5,7 @@ Adding comment to check.
 
 class GameState():
     def __init__(self):
-        '''self.board = [
+        self.board = [
             ["bR", "bN", "bB", "bQ", "bK", "bB", "bN", "bR"],
             ["bp", "bp", "bp", "bp", "bp", "bp", "bp", "bp"],
             ["--", "--", "--", "--", "--", "--", "--", "--"],
@@ -14,7 +14,7 @@ class GameState():
             ["--", "--", "--", "--", "--", "--", "--", "--"],
             ["wp", "wp", "wp", "wp", "wp", "wp", "wp", "wp"],
             ["wR", "wN", "wB", "wQ", "wK", "wB", "wN", "wR"]
-        ]'''
+        ]
 
         
         self.board = [
@@ -32,6 +32,8 @@ class GameState():
         self.moveLog = []
         self.whiteKingLocation = (6, 7)
         self.blackKingLocation = (6, 0)
+        #self.whiteKingLocation = (7, 4)
+        #self.blackKingLocation = (0, 4)
         self.checkMate = False
         self.staleMate = False
         self.eigthRankFinish = False
