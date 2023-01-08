@@ -6,8 +6,8 @@ import time
 import pygame
 import ChessEngine, SmartMoveFinder
 
-WIDTH = 480
-HEIGHT = 480
+WIDTH = 720
+HEIGHT = 720
 
 DIMENSION = 8
 
@@ -44,8 +44,10 @@ def main():
     selectedSquare = ()
     playerClicks = []
     gameOver = False
-    playerOne = True # Human playing white = true, ai is false
-    playerTwo = True # Human playing black = true, ai is false
+    playerOne = False # Human playing white = true, ai is false
+    playerTwo = False # Human playing black = true, ai is false
+
+    drawGameState(screen, gameState, validMoves, selectedSquare)
 
     while running:
         humanTurn = (gameState.whiteToMove and playerOne) or (not gameState.whiteToMove and playerTwo)
@@ -80,7 +82,6 @@ def main():
                     gameState.undoMove()
                     moveMade = True
                     gameOver = False
-                    gameState.eigthRankFinish = False
                     
                 if e.key == pygame.K_r:
                     gameState = ChessEngine.GameState()
@@ -114,12 +115,16 @@ def main():
         elif gameState.staleMate:
             gameOver = True
             drawText(screen, 'Stalemate')
-        elif gameState.eigthRankFinish:
-            gameOver = True
+        elif gameState.eigthRankFinish == 1:
             if gameState.whiteToMove:
-                drawText(screen, 'Black king wins the race!')
-            else:
-                drawText(screen, 'White king wins the race!')
+                gameOver = True
+                if gameState.blackKingLocation[0] == 0:
+                    drawText(screen, 'Black king wins the race!')
+                else:
+                    drawText(screen, 'White king wins the race!')
+        elif gameState.eigthRankFinish == 2:
+            gameOver = True
+            drawText(screen, 'Stalemate!')
         
         clock.tick(MAX_FPS)
         pygame.display.flip()

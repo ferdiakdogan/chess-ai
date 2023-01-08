@@ -1,9 +1,9 @@
 import random
 
-pieceScore = {"K": 0, "Q": 10, "R":5, "B": 3, "N": 3, "p": 1}
+pieceScore = {"K": 0, "Q": 9, "R":5, "B": 3, "N": 3, "p": 1}
 WIN = 1000
 DRAW = 0
-DEPTH = 1
+DEPTH = 2
 
 def findRandomMove(validMoves):
     return validMoves[random.randint(0, len(validMoves) - 1)]
@@ -101,7 +101,7 @@ def findMoveMinMax2(gameState, validMoves, depth, turnMultiplier):
 
 
 def scoreBoard(gameState):
-    if gameState.eigthRankFinish:
+    if gameState.eigthRankFinish == 1:
         if gameState.whiteToMove:
             return -WIN
         else:
