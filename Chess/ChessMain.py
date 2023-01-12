@@ -4,10 +4,12 @@ This script is the main script to control all the subscripts
 
 import time
 import pygame
-import ChessEngine, SmartMoveFinder
+import ChessEngine, SmartMoveFinder, AlphaBeta
+import sys
+from multiprocessing import Process, Queue
 
-WIDTH = 720
-HEIGHT = 720
+WIDTH = 520
+HEIGHT = 520
 
 DIMENSION = 8
 
@@ -38,13 +40,17 @@ def main():
     gameState = ChessEngine.GameState()
     validMoves = gameState.getValidMoves()
     moveMade = False
+    ai_thinking = False
+    moveUndone = False
+    move_finder_process = None
+    animate = False  # flag variable for when we should animate a move
 
     loadImages()
     running= True
     selectedSquare = ()
     playerClicks = []
     gameOver = False
-    playerOne = False # Human playing white = true, ai is false
+    playerOne = True # Human playing white = true, ai is false
     playerTwo = False # Human playing black = true, ai is false
 
     drawGameState(screen, gameState, validMoves, selectedSquare)
@@ -93,12 +99,28 @@ def main():
 
         # AI move finder logic
         if not gameOver and not humanTurn:
-            aiMove = SmartMoveFinder.findBestMoveMinMax(gameState, validMoves)
+            aiMove = SmartMoveFinder.findBestMoveAlphaBeta(gameState, validMoves)
             if aiMove is None:
                 aiMove = SmartMoveFinder.findRandomMove(validMoves)
             gameState.makeMove(aiMove)
             moveMade = True
 
+        # AlphaBeta move finder
+        # if not gameOver and not humanTurn and not moveUndone:
+        #     if not ai_thinking:
+        #         ai_thinking = True
+        #         return_queue = Queue()  # used to pass data between threads
+        #         move_finder_process = Process(target=AlphaBeta.findBestMove, args=(gameState, validMoves, return_queue))
+        #         move_finder_process.start()
+
+        #     if not move_finder_process.is_alive():
+        #         ai_move = return_queue.get()
+        #         if ai_move is None:
+        #             ai_move = AlphaBeta.findRandomMove(validMoves)
+        #         gameState.makeMove(ai_move)
+        #         moveMade = True
+        #         animate = True
+        #         ai_thinking = False
 
         if moveMade:
             validMoves = gameState.getValidMoves()

@@ -47,6 +47,13 @@ def findBestMoveMinMax(gameState, validMoves):
     findMoveMinMax2(gameState, validMoves, DEPTH, 1 if gameState.whiteToMove else -1)
     return nextMove
 
+def findBestMoveAlphaBeta(gameState, validMoves):
+    global nextMove
+    nextMove = None
+    random.shuffle(validMoves)
+    findMoveNegaMaxAlphaBeta(gameState, validMoves, DEPTH, -WIN, WIN, 1 if gameState.whiteToMove else -1)
+    return nextMove
+
 def findMoveMinMax(gameState, validMoves, depth, whiteToMove):
     global nextMove
     if depth == 0:
@@ -97,6 +104,44 @@ def findMoveMinMax2(gameState, validMoves, depth, turnMultiplier):
         
         gameState.undoMove()
     return maxScore
+
+def findMoveNegaMax(game_state, valid_moves, depth, turn_multiplier):
+    global next_move
+    if depth == 0:
+        return turn_multiplier * scoreBoard(game_state)
+
+    max_score = -WIN
+    for move in valid_moves:
+        game_state.makeMove(move)
+        next_moves = game_state.getValidMoves()
+        score = -findMoveNegaMax(game_state, next_moves, depth - 1, -turn_multiplier)
+        if score > max_score:
+            max_score = score
+            if depth == DEPTH:
+                next_move = move
+        game_state.undoMove()
+    return max_score
+
+def findMoveNegaMaxAlphaBeta(game_state, valid_moves, depth, alpha, beta, turn_multiplier):
+    global next_move
+    if depth == 0:
+        return turn_multiplier * scoreBoard(game_state)
+   
+    max_score = -WIN
+    for move in valid_moves:
+        game_state.makeMove(move)
+        next_moves = game_state.getValidMoves()
+        score = -findMoveNegaMaxAlphaBeta(game_state, next_moves, depth - 1, -beta, -alpha, -turn_multiplier)
+        if score > max_score:
+            max_score = score
+            if depth == DEPTH:
+                next_move = move
+        game_state.undoMove()
+        if max_score > alpha: #pruning happens
+            alpha = max_score
+        if alpha >= beta:
+            break
+    return max_score
 
 
 
