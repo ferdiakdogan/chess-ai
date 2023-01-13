@@ -161,8 +161,8 @@ def scoreBoard(gameState):
                 score += pieceScore[square[1]]
             elif square[0] == 'b':
                 score -= pieceScore[square[1]]
-    score += 1 * (7 - gameState.whiteKingLocation[0])
-    score -= 1 * (7 - gameState.blackKingLocation[0])
+    score += 3 * (7 - gameState.whiteKingLocation[0])
+    score -= 3 * (7 - gameState.blackKingLocation[0])
     return score
 
 def scoreMaterial(board):
