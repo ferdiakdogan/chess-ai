@@ -4,7 +4,7 @@ This script is the main script to control all the subscripts
 
 import time
 import pygame
-import ChessEngine, SmartMoveFinder, AlphaBeta
+import ChessEngine, SmartMoveFinder
 import sys
 from multiprocessing import Process, Queue
 

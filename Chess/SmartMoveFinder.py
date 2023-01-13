@@ -122,21 +122,21 @@ def findMoveNegaMax(game_state, valid_moves, depth, turn_multiplier):
         game_state.undoMove()
     return max_score
 
-def findMoveNegaMaxAlphaBeta(game_state, valid_moves, depth, alpha, beta, turn_multiplier):
-    global next_move
+def findMoveNegaMaxAlphaBeta(gameState, validMoves, depth, alpha, beta, turnMultiplier):
+    global nextMove
     if depth == 0:
-        return turn_multiplier * scoreBoard(game_state)
+        return turnMultiplier * scoreBoard(gameState)
    
     max_score = -WIN
-    for move in valid_moves:
-        game_state.makeMove(move)
-        next_moves = game_state.getValidMoves()
-        score = -findMoveNegaMaxAlphaBeta(game_state, next_moves, depth - 1, -beta, -alpha, -turn_multiplier)
+    for move in validMoves:
+        gameState.makeMove(move)
+        nextMoves = gameState.getValidMoves()
+        score = -findMoveNegaMaxAlphaBeta(gameState, nextMoves, depth - 1, -beta, -alpha, -turnMultiplier)
         if score > max_score:
             max_score = score
             if depth == DEPTH:
-                next_move = move
-        game_state.undoMove()
+                nextMove = move
+        gameState.undoMove()
         if max_score > alpha: #pruning happens
             alpha = max_score
         if alpha >= beta:
