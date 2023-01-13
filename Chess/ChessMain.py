@@ -105,23 +105,6 @@ def main():
             gameState.makeMove(aiMove)
             moveMade = True
 
-        # AlphaBeta move finder
-        # if not gameOver and not humanTurn and not moveUndone:
-        #     if not ai_thinking:
-        #         ai_thinking = True
-        #         return_queue = Queue()  # used to pass data between threads
-        #         move_finder_process = Process(target=AlphaBeta.findBestMove, args=(gameState, validMoves, return_queue))
-        #         move_finder_process.start()
-
-        #     if not move_finder_process.is_alive():
-        #         ai_move = return_queue.get()
-        #         if ai_move is None:
-        #             ai_move = AlphaBeta.findRandomMove(validMoves)
-        #         gameState.makeMove(ai_move)
-        #         moveMade = True
-        #         animate = True
-        #         ai_thinking = False
-
         if moveMade:
             validMoves = gameState.getValidMoves()
             moveMade = False

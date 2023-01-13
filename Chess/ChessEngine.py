@@ -71,9 +71,9 @@ class GameState():
                     self.eigthRankFinish -= 1
 
     def getValidMoves(self):
-        alreadyRemoved = False
         moves = self.getPossibleMoves()
         for i in range(len(moves)-1, -1, -1):
+            alreadyRemoved = False
             self.makeMove(moves[i])
             self.whiteToMove = not self.whiteToMove
             if self.inCheck():
